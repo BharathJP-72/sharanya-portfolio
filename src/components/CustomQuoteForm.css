@@ -1,0 +1,131 @@
+.custom-quote-form {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+}
+
+.custom-quote-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.custom-quote-form .form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.custom-quote-form label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.custom-quote-form input[type="text"],
+.custom-quote-form input[type="email"],
+.custom-quote-form input[type="tel"],
+.custom-quote-form textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: #0a0a0a;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+}
+
+.custom-quote-form input:focus,
+.custom-quote-form textarea:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.1);
+}
+
+.custom-quote-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Checkbox Grid */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-primary) !important;
+  font-weight: 400 !important;
+  font-size: 0.9rem !important;
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: #0a0a0a;
+  position: relative;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.checkbox-label:hover .checkbox-custom {
+  border-color: rgba(0, 240, 255, 0.5);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+  background-color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+}
+
+.error-text {
+  color: #ff4d4f;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .custom-quote-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
