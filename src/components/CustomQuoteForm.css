@@ -129,3 +129,25 @@
     grid-template-columns: 1fr;
   }
 }
+
+.terms-group {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terms-label {
+  align-items: flex-start !important;
+}
+
+.terms-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.terms-text a {
+  color: var(--accent-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

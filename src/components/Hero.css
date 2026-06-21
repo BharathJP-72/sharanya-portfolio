@@ -1,11 +1,12 @@
 .hero {
-  padding-top: var(--spacing-xl);
+  padding-top: calc(var(--spacing-xl) + 2rem);
   padding-bottom: 0;
   position: relative;
   overflow: hidden;
 }
 
 .hero-container {
+  flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
@@ -60,7 +61,7 @@
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 2.5rem;
+  padding: 1.5rem;
   width: 100%;
   max-width: 450px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 240, 255, 0.05);
@@ -148,6 +149,7 @@
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: var(--spacing-md);
   }
   .hero-badges {
     justify-content: center;
@@ -156,6 +158,23 @@
     justify-content: center;
   }
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-badges {
+    display: none; /* Hide badges on mobile to save vertical space */
+  }
+  .quote-card {
+    padding: 1.25rem;
+  }
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  .hero-subtitle {
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
   }
 }

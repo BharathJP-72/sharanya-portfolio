@@ -1,0 +1,80 @@
+.tc-container {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  background-color: var(--bg-color); /* assuming main app uses variables */
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+}
+
+.tc-content {
+  max-width: 800px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tc-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+  background: linear-gradient(90deg, #fff, #a0a0a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tc-last-updated {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 40px;
+}
+
+.tc-section {
+  margin-bottom: 30px;
+}
+
+.tc-section h2 {
+  font-size: 1.4rem;
+  color: #e0e0e0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.tc-section p {
+  color: #b0b0b0;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.tc-section ul {
+  padding-left: 20px;
+  color: #b0b0b0;
+  line-height: 1.6;
+}
+
+.tc-section li {
+  margin-bottom: 10px;
+}
+
+.tc-section strong {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .tc-container {
+    padding: 80px 15px 40px;
+  }
+  
+  .tc-content {
+    padding: 25px;
+  }
+  
+  .tc-content h1 {
+    font-size: 2rem;
+  }
+}

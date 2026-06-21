@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { processPayment } from '../utils/razorpay';
+import { sendOwnerEmail, sendClientEmail } from '../utils/emailjs';
 import './CustomQuoteForm.css';
 
 const SERVICES = [
@@ -17,10 +20,12 @@ const CustomQuoteForm = ({ onFormSubmit }) => {
     whatsappNumber: '',
     emailAddress: '',
     selectedServices: [],
-    description: ''
+    description: '',
+    agreedToTerms: false
   });
   
   const [errors, setErrors] = useState({});
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleTextChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +55,14 @@ const CustomQuoteForm = ({ onFormSubmit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleTermsChange = (e) => {
+    setFormData(prev => ({ ...prev, agreedToTerms: e.target.checked }));
+    if (errors.agreedToTerms) {
+      setErrors(prev => ({ ...prev, agreedToTerms: null }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -67,14 +79,42 @@ const CustomQuoteForm = ({ onFormSubmit }) => {
       newErrors.selectedServices = 'Please select at least one service.';
     }
 
+    if (!formData.agreedToTerms) {
+      newErrors.agreedToTerms = 'You must agree to the Terms & Conditions.';
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    if (onFormSubmit) {
-      onFormSubmit(formData);
-    }
+    setIsProcessing(true);
+
+    await processPayment(
+      299, // Amount for first consultation
+      async (response) => {
+        const finalData = { ...formData, paymentId: response.razorpay_payment_id };
+        
+        // Send emails
+        await sendOwnerEmail(finalData);
+        await sendClientEmail(finalData);
+
+        setIsProcessing(false);
+        // On Success
+        if (onFormSubmit) {
+          onFormSubmit(finalData);
+        } else {
+          alert('Payment Successful! We have received your request and sent a confirmation email.');
+        }
+      },
+      (errorMsg) => {
+        setIsProcessing(false);
+        alert(`Payment Failed: ${errorMsg}`);
+      },
+      () => {
+        setIsProcessing(false);
+      }
+    );
   };
 
   return (
@@ -152,8 +192,24 @@ const CustomQuoteForm = ({ onFormSubmit }) => {
         ></textarea>
       </div>
 
-      <button type="submit" className="btn-primary w-100 submit-btn">
-        Request Free 15-Min Consultation
+      <div className="form-group terms-group">
+        <label className="checkbox-label terms-label">
+          <input
+            type="checkbox"
+            name="agreedToTerms"
+            checked={formData.agreedToTerms}
+            onChange={handleTermsChange}
+          />
+          <span className="checkbox-custom"></span>
+          <span className="terms-text">
+            I agree to the <Link to="/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</Link> and acknowledge that the consultation fee will be refunded if the consultation is not possible.
+          </span>
+        </label>
+        {errors.agreedToTerms && <span className="error-text">{errors.agreedToTerms}</span>}
+      </div>
+
+      <button type="submit" className="btn-primary w-100 submit-btn" disabled={isProcessing}>
+        {isProcessing ? 'Processing Payment...' : 'Request First Consultation (Rs. 299)'}
       </button>
     </form>
   );

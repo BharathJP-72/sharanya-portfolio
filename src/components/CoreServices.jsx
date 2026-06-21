@@ -77,6 +77,22 @@ const CoreServices = () => {
           </div>
         </div>
 
+        {/* Compliance Banner */}
+        <div id="compliance" className="service-category" style={{ marginTop: 'var(--spacing-lg)', marginBottom: 0 }}>
+          <div className="compliance-banner">
+            <div className="compliance-content">
+              <div className="card-icon-wrapper" style={{ marginBottom: 0, flexShrink: 0 }}>
+                <CheckCircle2 size={24} className="card-icon" />
+              </div>
+              <div>
+                <h4 className="card-title" style={{ fontSize: '1.25rem' }}>Annual Compliance Package</h4>
+                <p className="card-description">End-to-end yearly compliance management for your registered entity. Stay fully compliant with ROC, GST, and statutory requirements.</p>
+              </div>
+            </div>
+            <button className="btn-outline" onClick={() => window.location.href='#pricing'}>View Pricing</button>
+          </div>
+        </div>
+
       </div>
     </section>
   );

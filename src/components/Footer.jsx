@@ -1,4 +1,5 @@
-import React from 'react';
+// React is not needed when using new JSX transform
+import { Link } from 'react-router-dom';
 import { MessageCircle, Clock } from 'lucide-react';
 import './Footer.css';
 
@@ -37,7 +38,7 @@ const Footer = () => {
             <h4 className="footer-heading">LEGAL</h4>
             <ul>
               <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Use</a></li>
+              <li><Link to="/terms">Terms & Conditions</Link></li>
             </ul>
           </div>
         </div>
