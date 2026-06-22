@@ -37,7 +37,7 @@ const Footer = () => {
           <div className="footer-column">
             <h4 className="footer-heading">LEGAL</h4>
             <ul>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms & Conditions</Link></li>
             </ul>
           </div>

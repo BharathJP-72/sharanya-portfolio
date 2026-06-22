@@ -1,10 +1,25 @@
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Home, ScrollText, Handshake, FileSignature, ArrowRight } from 'lucide-react';
 import CustomQuoteForm from './CustomQuoteForm';
 import './LegalDrafting.css';
 
 const LegalDrafting = () => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#drafting') {
+        setShowQuoteForm(true);
+      }
+    };
+    
+    // Check on mount
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   return (
     <section id="drafting" className="legal-drafting">
@@ -68,7 +83,7 @@ const LegalDrafting = () => {
         {/* CTA Section */}
         <div className="cta-section">
           <h2 className="cta-title">Start Your Business Journey Today.</h2>
-          <button className="btn-outline cta-btn" onClick={() => setShowQuoteForm(!showQuoteForm)}>
+          <button className="btn-primary cta-btn pulse-animation" onClick={() => setShowQuoteForm(!showQuoteForm)}>
             {showQuoteForm ? 'Hide Form' : 'Tell Your Exact Needs'} <ArrowRight size={16} />
           </button>
           

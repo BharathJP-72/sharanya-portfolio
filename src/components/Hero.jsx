@@ -32,7 +32,10 @@ const Hero = () => {
             <h3 className="quote-title">Quick Quote</h3>
             <p className="quote-subtitle">Get a custom quote in minutes</p>
             
-            <QuickQuoteForm onFormSubmit={(data) => console.log('Quote requested:', data)} />
+            <QuickQuoteForm onFormSubmit={(data) => {
+              window.location.href = '/#drafting';
+              // Could store `data` in context or localStorage if needed for pre-filling later
+            }} />
           </div>
         </div>
       </div>
